@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommandeGateau.View.CommandePage"
+             xmlns:model="clr-namespace:CommandeGateau.Models"
+             xmlns:viewmodel="clr-namespace:CommandeGateau.ViewModel"
+             x:DataType="viewmodel:CommandeViewModel"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Logo en haut -->
+        <Image Source="logo.png"
+               HeightRequest="150"
+               HorizontalOptions="Center"
+               Margin="0,20,0,10" />
+
+        <!-- Liste des commandes -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Commandes}"
+                        Margin="10,0"
+                        IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Commande">
+                    <Grid Padding="10">
+                        <Border Stroke="#F4A950"
+                StrokeThickness="2"
+                Background="White"
+                StrokeShape="RoundRectangle 25"
+                Padding="10"
+                Margin="0,10">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BaseViewModel}}, Path=GoToDetailsCommand}"
+                                      CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Contenu de la commande -->
+                                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="5">
+                                    <Label Text="{Binding NameClient}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#E91E63"
+                           HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding DateLivraison, StringFormat='Livraison : {0:dd/MM/yyyy}'}"
+                           FontSize="14"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Total, StringFormat='Total : {0:F2} €'}"
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+
+                                
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!-- ActivityIndicator centré -->
+        <ActivityIndicator Grid.RowSpan="3"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           WidthRequest="50"
+                           HeightRequest="50"
+                           Color="#E91E63" />
+    </Grid>
+</ContentPage>

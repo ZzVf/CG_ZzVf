@@ -1,0 +1,92 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:CommandeGateau.Models"
+             xmlns:viewmodel="clr-namespace:CommandeGateau.ViewModel"
+             x:Class="CommandeGateau.View.DetailPage"
+             x:DataType="viewmodel:DetailViewModel"
+             Title="Détails de la commande"
+             BackgroundColor="White">
+
+    <Grid>
+        <!-- Contenu principal avec scroll -->
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Nom du client :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.NameClient}" />
+
+                <Label Text="Nom :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.Name}" />
+
+                <Label Text="Âge :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.Age}" />
+
+                <Label Text="Date de livraison :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.DateLivraison, StringFormat='{0:dd/MM/yyyy}'}" />
+
+                <Label Text="Note :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.Note}" />
+
+                <Label Text="Total :" FontAttributes="Bold" />
+                <Label Text="{Binding Commande.Total, StringFormat='{0:F2} €'}" />
+
+                <Label Text="Pâtisseries :" FontAttributes="Bold" FontSize="18" />
+
+                <CollectionView ItemsSource="{Binding Commande.Patisseries}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:PatisserieTemplate">
+                            <Border BackgroundColor="#F9F9F9"
+                                    Padding="10"
+                                    Margin="0,5"
+                                    Stroke="#DDD"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 15">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding PatisserieType}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Name, StringFormat='Thème : {0}'}" />
+                                    <Label Text="{Binding Quantity, StringFormat='Quantité : {0}'}" />
+                                    <Label Text="{Binding Price, StringFormat='Prix unitaire : {0:F2} €'}" />
+
+                                    <VerticalStackLayout>
+                                        <VerticalStackLayout.Triggers>
+                                            <DataTrigger TargetType="VerticalStackLayout"
+                                                         Binding="{Binding PatisserieType}"
+                                                         Value="Gateau">
+                                                <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                        </VerticalStackLayout.Triggers>
+
+                                        <Label Text="{Binding Etage, StringFormat='Étages : {0}'}" />
+                                        <Label Text="{Binding Gout, StringFormat='Goût : {0}'}" />
+                                        <Label Text="{Binding Fruite, StringFormat='Fruité : {0}'}" />
+                                        <Label Text="{Binding Modelage, StringFormat='Modelage : {0}'}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout>
+                                        <VerticalStackLayout.Triggers>
+                                            <DataTrigger TargetType="VerticalStackLayout"
+                                                         Binding="{Binding PatisserieType}"
+                                                         Value="Biscuit">
+                                                <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                        </VerticalStackLayout.Triggers>
+
+                                        <Label Text="{Binding Taille, StringFormat='Grand format : {0}'}" />
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ImageButton Source="delete.png"
+                     WidthRequest="24"
+                     HeightRequest="24"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="End"
+                     VerticalOptions="Start"
+                     Margin="0,10,10,0"
+                     Command="{Binding DeleteCommandeCommand}" />
+    </Grid>
+</ContentPage>

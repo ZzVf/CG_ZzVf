@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommandeGateau.View.NewPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewmodel="clr-namespace:CommandeGateau.ViewModel"
+             x:DataType="viewmodel:NewViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Image Source="logo.png"
+                   HeightRequest="200"
+                   HorizontalOptions="Center" />
+
+            <DatePicker Date="{Binding DateLivraison}"
+                   MinimumDate="{x:Static sys:DateTime.Today}" />
+            
+            <Entry Placeholder="Nom du Client"
+                   Text="{Binding NameClient}" />
+
+            <Entry Placeholder="Nom"
+                   Text="{Binding Name}" />
+
+            <Entry Placeholder="Âge"
+                   Keyboard="Numeric"
+                   Text="{Binding Age}" />
+            <Entry Placeholder="Note"
+                    Text="{Binding Note}" />
+            <HorizontalStackLayout>
+                <Entry Placeholder="Total"
+           Keyboard="Numeric"
+           Text="{Binding Total}" 
+           WidthRequest="100" />
+                <Label Text="€"
+           VerticalOptions="Center"
+           FontSize="18"
+           TextColor="Gray" />
+            </HorizontalStackLayout>
+
+
+            <Button Text="Patisseries"
+                    Command="{Binding GoToPatisserieCommand}"
+                    BackgroundColor="#D8A94A"
+                    BorderWidth="2"
+                    CornerRadius="20"
+                    TextColor="#ffffff"
+                    HeightRequest="50"/>
+            <Button Text="Valider la commande"
+                    Command="{Binding ValiderCommandeCommand}"
+                    BackgroundColor="Transparent"
+                    BorderColor="#D8A94A"
+                    BorderWidth="2"
+                    CornerRadius="20"
+                    TextColor="#EC4E8F"
+                    HeightRequest="50"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
