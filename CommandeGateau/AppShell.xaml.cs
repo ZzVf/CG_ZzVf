@@ -4,12 +4,13 @@ namespace CommandeGateau;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
-	{
-		InitializeComponent();
+    public AppShell()
+    {
+        InitializeComponent();
         Routing.RegisterRoute(nameof(NewPage), typeof(NewPage));
-		Routing.RegisterRoute(nameof(PatisseriePage), typeof(PatisseriePage));
-		Routing.RegisterRoute(nameof(CommandePage), typeof(CommandePage));
-		Routing.RegisterRoute(nameof(DetailPage), typeof(DetailPage));
+        Routing.RegisterRoute(nameof(PatisseriePage), typeof(PatisseriePage));
+        Routing.RegisterRoute(nameof(CommandePage), typeof(CommandePage));
+        Routing.RegisterRoute(nameof(DetailPage), typeof(DetailPage));
+        Routing.RegisterRoute(nameof(ArchivePage), typeof(ArchivePage));
     }
 }

@@ -79,6 +79,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\ArchivePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\CommandePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

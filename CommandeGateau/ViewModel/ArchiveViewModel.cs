@@ -12,15 +12,17 @@ using System.Threading.Tasks;
 
 namespace CommandeGateau.ViewModel
 {
-    public partial class CommandeViewModel : BaseViewModel
+    public partial class ArchiveViewModel : BaseViewModel
     {
         private readonly CommandeService _service;
+        public int NombreCommandesArchivees => Commandes.Count;
         public ObservableCollection<Commande> Commandes { get; }
 
-        public CommandeViewModel(CommandeService service)
+        public ArchiveViewModel(CommandeService service)
         {
             _service = service;
             Commandes = new ObservableCollection<Commande>();
+            Commandes.CollectionChanged += (_, _) => OnPropertyChanged(nameof(NombreCommandesArchivees));
             GetCommandeAsync();
         }
 
@@ -33,7 +35,7 @@ namespace CommandeGateau.ViewModel
 
             try
             {
-                var commandes = await _service.GetCommandes();
+                var commandes = await _service.GetArchive();
 
                 var commandesTriees = commandes
                     .OrderBy(c => c.DateLivraison)
@@ -59,23 +61,16 @@ namespace CommandeGateau.ViewModel
         public async Task GoToDetails(Commande commandeToDetail)
         {
             await Shell.Current.GoToAsync(
-    nameof(DetailPage),
-    new Dictionary<string, object>
-    {
-        { "Commande", commandeToDetail },
-        { "IsFromArchive", false }
-    });
-
-        }
-        [RelayCommand]
-        public static async Task GoToArchive()
+        nameof(DetailPage),
+        new Dictionary<string, object>
         {
-            await Shell.Current.GoToAsync(nameof(ArchivePage));
+            { "Commande", commandeToDetail },
+            { "IsFromArchive", true }
+        });
         }
         public async Task RefreshCommandes()
         {
             await GetCommandeAsync();
         }
-
     }
 }

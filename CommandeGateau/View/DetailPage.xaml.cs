@@ -20,5 +20,10 @@ public partial class DetailPage : ContentPage, IQueryAttributable
         {
             _viewModel.SetCommande(commande);
         }
+
+        if (query.TryGetValue("IsFromArchive", out var isFromArchiveObj) && isFromArchiveObj is bool isFromArchive)
+        {
+            _viewModel.IsFromArchive = isFromArchive;
+        }
     }
 }

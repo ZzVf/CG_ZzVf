@@ -8,7 +8,6 @@
              BackgroundColor="White">
 
     <Grid>
-        <!-- Contenu principal avec scroll -->
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
                 <Label Text="Nom du client :" FontAttributes="Bold" />
@@ -81,12 +80,34 @@
         </ScrollView>
 
         <ImageButton Source="delete.png"
-                     WidthRequest="24"
-                     HeightRequest="24"
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="End"
-                     VerticalOptions="Start"
-                     Margin="0,10,10,0"
-                     Command="{Binding DeleteCommandeCommand}" />
+             WidthRequest="24"
+             HeightRequest="24"
+             BackgroundColor="Transparent"
+             HorizontalOptions="End"
+             VerticalOptions="Start"
+             Margin="0,10,10,0"
+             Command="{Binding DeleteCommandeCommand}"
+             IsVisible="{Binding IsFromArchive, Converter={StaticResource InverseBoolConverter}}" />
+
+        <ImageButton Source="confirm.png"
+             WidthRequest="24"
+             HeightRequest="24"
+             BackgroundColor="Transparent"
+             HorizontalOptions="End"
+             VerticalOptions="Start"
+             Margin="0,60,10,0"
+             Command="{Binding ArchiveCommandeCommand}"
+             IsVisible="{Binding IsFromArchive, Converter={StaticResource InverseBoolConverter}}" />
+
+        <ImageButton Source="delete.png"
+             WidthRequest="24"
+             HeightRequest="24"
+             BackgroundColor="Transparent"
+             HorizontalOptions="End"
+             VerticalOptions="Start"
+             Margin="0,10,10,0"
+             Command="{Binding DeleteArchiveCommand}"
+             IsVisible="{Binding IsNotFromArchive, Converter={StaticResource InverseBoolConverter}}" />
+
     </Grid>
 </ContentPage>
