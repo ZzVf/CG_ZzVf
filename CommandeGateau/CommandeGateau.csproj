@@ -27,8 +27,8 @@
 		<ApplicationId>com.companyname.commandegateau</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
-		<ApplicationVersion>2</ApplicationVersion>
+		<ApplicationDisplayVersion>1.2</ApplicationDisplayVersion>
+		<ApplicationVersion>3</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -60,16 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="NewFolder1\**" />
-	  <Compile Remove="NewFolder1\**" />
-	  <EmbeddedResource Remove="NewFolder1\**" />
-	  <MauiCss Remove="NewFolder1\**" />
-	  <MauiXaml Remove="NewFolder1\**" />
-	  <None Remove="NewFolder1\**" />
+		<AndroidResource Remove="NewFolder1\**" />
+		<Compile Remove="NewFolder1\**" />
+		<EmbeddedResource Remove="NewFolder1\**" />
+		<MauiCss Remove="NewFolder1\**" />
+		<MauiXaml Remove="NewFolder1\**" />
+		<None Remove="NewFolder1\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
+		<AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,21 +79,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\ArchivePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CommandePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\NewPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\PatisseriePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="View\ArchivePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\CommandePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\DetailPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\NewPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\PatisseriePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>
