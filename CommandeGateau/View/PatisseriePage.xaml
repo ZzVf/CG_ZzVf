@@ -52,14 +52,10 @@
 
             <StackLayout IsVisible="{Binding IsGateauVisible}" Padding="10" BackgroundColor="#FFF3E0" Spacing="10">
                 <Label Text="Formulaire pour Gâteau" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding GateauNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding GateauQuantite}" Keyboard="Numeric" />
-                <Label Text="Goût :" />
-                <Entry Text="{Binding GateauGout}" />
-                <Label Text="Nombre d'étages :" />
-                <Entry Text="{Binding GateauEtage}" Keyboard="Numeric" />
+                <Entry Text="{Binding GateauNom}" Placeholder="Nom" />
+                <Entry Text="{Binding GateauQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
+                <Entry Text="{Binding GateauGout}" Placeholder="Goût" />
+                <Entry Text="{Binding GateauEtage}" Keyboard="Numeric" Placeholder="Nombre d'étages" />
                 <Label Text="Fruité :" />
                 <Switch IsToggled="{Binding GateauFruite}" />
                 <Label Text="Modelage :" />
@@ -69,13 +65,10 @@
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Biscuit -->
             <StackLayout IsVisible="{Binding IsBiscuitVisible}" Padding="10" BackgroundColor="#E8F5E9" Spacing="10">
                 <Label Text="Formulaire pour Biscuit" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding BiscuitNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding BiscuitQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding BiscuitNom}" Placeholder="Nom" />
+                <Entry Text="{Binding BiscuitQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Label Text="Grande taille :" />
                 <Switch IsToggled="{Binding BiscuitTaille}" />
                 <Button Text="Ajouter le biscuit"
@@ -83,61 +76,46 @@
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Cupcake -->
             <StackLayout IsVisible="{Binding IsCupcakeVisible}" Padding="10" BackgroundColor="#F3E5F5" Spacing="10">
                 <Label Text="Formulaire pour Cupcake" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding CupcakeNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding CupcakeQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding CupcakeNom}" Placeholder="Nom" />
+                <Entry Text="{Binding CupcakeQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Button Text="Ajouter le cupcake"
                         Command="{Binding AjouterCupcakeCommand}"
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Macaron -->
             <StackLayout IsVisible="{Binding IsMacaronVisible}" Padding="10" BackgroundColor="#F1F8E9" Spacing="10">
                 <Label Text="Formulaire pour Macaron" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding MacaronNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding MacaronQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding MacaronNom}" Placeholder="Nom" />
+                <Entry Text="{Binding MacaronQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Button Text="Ajouter le macaron"
                         Command="{Binding AjouterMacaronCommand}"
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Magnum Cake -->
             <StackLayout IsVisible="{Binding IsMagnumVisible}" Padding="10" BackgroundColor="#FFEBEE" Spacing="10">
                 <Label Text="Formulaire pour Magnum Cake" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding MagnumNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding MagnumQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding MagnumNom}" Placeholder="Nom" />
+                <Entry Text="{Binding MagnumQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Button Text="Ajouter le magnum cake"
                         Command="{Binding AjouterMagnumCommand}"
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Pop Cake -->
             <StackLayout IsVisible="{Binding IsPopCakeVisible}" Padding="10" BackgroundColor="#FFF8E1" Spacing="10">
                 <Label Text="Formulaire pour Pop Cake" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding PopCakeNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding PopCakeQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding PopCakeNom}" Placeholder="Nom" />
+                <Entry Text="{Binding PopCakeQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Button Text="Ajouter le pop cake"
                         Command="{Binding AjouterPopCakeCommand}"
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />
             </StackLayout>
 
-            <!-- Formulaire Verrine -->
             <StackLayout IsVisible="{Binding IsVerrineVisible}" Padding="10" BackgroundColor="#E1F5FE" Spacing="10">
                 <Label Text="Formulaire pour Verrine" FontAttributes="Bold" FontSize="18" />
-                <Label Text="Nom :" />
-                <Entry Text="{Binding VerrineNom}" />
-                <Label Text="Quantité :" />
-                <Entry Text="{Binding VerrineQuantite}" Keyboard="Numeric" />
+                <Entry Text="{Binding VerrineNom}" Placeholder="Nom" />
+                <Entry Text="{Binding VerrineQuantite}" Keyboard="Numeric" Placeholder="Quantité" />
                 <Button Text="Ajouter la verrine"
                         Command="{Binding AjouterVerrineCommand}"
                         BackgroundColor="#EC4E8F" TextColor="White" CornerRadius="20" />

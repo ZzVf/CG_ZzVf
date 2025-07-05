@@ -2,6 +2,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+#if ANDROID
+using Android.Content;
+using Android.Provider;
+using Microsoft.Maui.ApplicationModel;
+#endif
 
 namespace CommandeGateau.Services
 {
@@ -68,6 +73,7 @@ namespace CommandeGateau.Services
 
             var updatedJson = JsonSerializer.Serialize(commandes, _options);
             await File.WriteAllTextAsync(_filePath, updatedJson);
+            AjouterEvenementAgenda(nouvelleCommande);
         }
 
         public async Task<List<Commande>> GetCommandes()
@@ -152,5 +158,29 @@ namespace CommandeGateau.Services
             var updatedJson = JsonSerializer.Serialize(commandes, _options);
             await File.WriteAllTextAsync(_archivePath, updatedJson);
         }
+        public void AjouterEvenementAgenda(Commande commande)
+        {
+#if ANDROID
+            var context = Android.App.Application.Context;
+            var intent = new Intent(Intent.ActionInsert);
+            intent.SetData(CalendarContract.Events.ContentUri);
+            intent.PutExtra(CalendarContract.Events.InterfaceConsts.Title, $"Commande - {commande.NameClient}");
+            intent.PutExtra(CalendarContract.Events.InterfaceConsts.Description, "");
+            intent.PutExtra(CalendarContract.Events.InterfaceConsts.EventLocation, "");
+
+            var debut = new Java.Util.Date(commande.DateLivraison.Year - 1900, commande.DateLivraison.Month - 1, commande.DateLivraison.Day);
+            var fin = new Java.Util.Date(commande.DateLivraison.Year - 1900, commande.DateLivraison.Month - 1, commande.DateLivraison.Day + 1);
+
+            intent.PutExtra(CalendarContract.ExtraEventBeginTime, debut.Time);
+            intent.PutExtra(CalendarContract.ExtraEventEndTime, fin.Time);
+
+            intent.PutExtra(CalendarContract.Events.InterfaceConsts.AllDay, true);
+            intent.PutExtra(CalendarContract.Events.InterfaceConsts.HasAlarm, false);
+
+            intent.SetFlags(ActivityFlags.NewTask);
+            context.StartActivity(intent);
+#endif
+        }
+
     }
 }

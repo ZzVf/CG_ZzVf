@@ -21,7 +21,6 @@ namespace CommandeGateau.ViewModel
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(EstEnModeFormulaire));
 
-                    // Mise à jour visibilité
                     OnPropertyChanged(nameof(IsGateauVisible));
                     OnPropertyChanged(nameof(IsBiscuitVisible));
                     OnPropertyChanged(nameof(IsCupcakeVisible));
@@ -35,7 +34,6 @@ namespace CommandeGateau.ViewModel
 
         public bool EstEnModeFormulaire => !string.IsNullOrEmpty(TypeSelectionne);
 
-        // Visibilité conditionnelle
         public bool IsGateauVisible => TypeSelectionne == "Gateau";
         public bool IsBiscuitVisible => TypeSelectionne == "Biscuit";
         public bool IsCupcakeVisible => TypeSelectionne == "Cupcake";
@@ -59,20 +57,23 @@ namespace CommandeGateau.ViewModel
         });
 
         public string GateauNom { get; set; }
-        public int GateauQuantite { get; set; }
-        public int GateauEtage { get; set; }
+        public string GateauQuantite { get; set; }
+        public string GateauEtage { get; set; }
         public string GateauGout { get; set; }
         public bool GateauFruite { get; set; }
         public bool GateauModelage { get; set; }
 
         public ICommand AjouterGateauCommand => new Command(() =>
         {
+            int.TryParse(GateauQuantite, out int quantite);
+            int.TryParse(GateauEtage, out int etage);
+
             var gateau = new Gateau
             {
                 Id = Patisseries.Count + 1,
                 Name = GateauNom,
-                Quantity = GateauQuantite,
-                Etage = GateauEtage,
+                Quantity = quantite,
+                Etage = etage,
                 Gout = GateauGout,
                 Fruite = GateauFruite,
                 Modelage = GateauModelage
@@ -83,16 +84,18 @@ namespace CommandeGateau.ViewModel
         });
 
         public string BiscuitNom { get; set; }
-        public int BiscuitQuantite { get; set; }
+        public string BiscuitQuantite { get; set; }
         public bool BiscuitTaille { get; set; }
 
         public ICommand AjouterBiscuitCommand => new Command(() =>
         {
+            int.TryParse(BiscuitQuantite, out int quantite);
+
             var biscuit = new Biscuit
             {
                 Id = Patisseries.Count + 1,
                 Name = BiscuitNom,
-                Quantity = BiscuitQuantite,
+                Quantity = quantite,
                 Taille = BiscuitTaille
             };
 
@@ -101,15 +104,17 @@ namespace CommandeGateau.ViewModel
         });
 
         public string CupcakeNom { get; set; }
-        public int CupcakeQuantite { get; set; }
+        public string CupcakeQuantite { get; set; }
 
         public ICommand AjouterCupcakeCommand => new Command(() =>
         {
+            int.TryParse(CupcakeQuantite, out int quantite);
+
             var cupcake = new CupCake
             {
                 Id = Patisseries.Count + 1,
                 Name = CupcakeNom,
-                Quantity = CupcakeQuantite
+                Quantity = quantite
             };
 
             Patisseries.Add(cupcake);
@@ -117,15 +122,17 @@ namespace CommandeGateau.ViewModel
         });
 
         public string MacaronNom { get; set; }
-        public int MacaronQuantite { get; set; }
+        public string MacaronQuantite { get; set; }
 
         public ICommand AjouterMacaronCommand => new Command(() =>
         {
+            int.TryParse(MacaronQuantite, out int quantite);
+
             var macaron = new Macaron
             {
                 Id = Patisseries.Count + 1,
                 Name = MacaronNom,
-                Quantity = MacaronQuantite
+                Quantity = quantite
             };
 
             Patisseries.Add(macaron);
@@ -133,15 +140,17 @@ namespace CommandeGateau.ViewModel
         });
 
         public string MagnumNom { get; set; }
-        public int MagnumQuantite { get; set; }
+        public string MagnumQuantite { get; set; }
 
         public ICommand AjouterMagnumCommand => new Command(() =>
         {
+            int.TryParse(MagnumQuantite, out int quantite);
+
             var magnum = new MagnumCake
             {
                 Id = Patisseries.Count + 1,
                 Name = MagnumNom,
-                Quantity = MagnumQuantite
+                Quantity = quantite
             };
 
             Patisseries.Add(magnum);
@@ -149,15 +158,17 @@ namespace CommandeGateau.ViewModel
         });
 
         public string PopCakeNom { get; set; }
-        public int PopCakeQuantite { get; set; }
+        public string PopCakeQuantite { get; set; }
 
         public ICommand AjouterPopCakeCommand => new Command(() =>
         {
+            int.TryParse(PopCakeQuantite, out int quantite);
+
             var popcake = new PopCake
             {
                 Id = Patisseries.Count + 1,
                 Name = PopCakeNom,
-                Quantity = PopCakeQuantite
+                Quantity = quantite
             };
 
             Patisseries.Add(popcake);
@@ -165,15 +176,17 @@ namespace CommandeGateau.ViewModel
         });
 
         public string VerrineNom { get; set; }
-        public int VerrineQuantite { get; set; }
+        public string VerrineQuantite { get; set; }
 
         public ICommand AjouterVerrineCommand => new Command(() =>
         {
+            int.TryParse(VerrineQuantite, out int quantite);
+
             var verrine = new Verrine
             {
                 Id = Patisseries.Count + 1,
                 Name = VerrineNom,
-                Quantity = VerrineQuantite
+                Quantity = quantite
             };
 
             Patisseries.Add(verrine);
