@@ -30,7 +30,18 @@
 
                 <Label Text="Pâtisseries :" FontAttributes="Bold" FontSize="18" />
 
-                <CollectionView ItemsSource="{Binding Commande.Patisseries}">
+                <HorizontalStackLayout IsVisible="{Binding IsFromArchive, Converter={StaticResource InverseBoolConverter}}" >
+                    <Button 
+                        Text="Modifier" 
+                        Command="{Binding ToggleEditPatisseriesCommand}" 
+                        IsVisible="{Binding IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}" />
+                    <Button 
+                        Text="Terminer" 
+                        Command="{Binding ConfirmEditPatisseriesCommand}" 
+                        IsVisible="{Binding IsEditingPatisseries}" />
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Patisseries}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:PatisserieTemplate">
                             <Border BackgroundColor="#F9F9F9"
@@ -40,12 +51,44 @@
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 15">
                                 <VerticalStackLayout Spacing="5">
-                                    <Label Text="{Binding PatisserieType}" FontAttributes="Bold" />
-                                    <Label Text="{Binding Name, StringFormat='Thème : {0}'}" />
-                                    <Label Text="{Binding Quantity, StringFormat='Quantité : {0}'}" />
-                                    <Label Text="{Binding Price, StringFormat='Prix unitaire : {0:F2} €'}" />
 
-                                    <VerticalStackLayout>
+                                    <Label Text="{Binding PatisserieType}" FontAttributes="Bold" />
+
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Label Text="Thème : " VerticalOptions="Center"/>
+                                        <Entry Grid.Column="1" 
+                                            Text="{Binding Name, Mode=TwoWay}" 
+                                            Placeholder="Thème"
+                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries}"
+                                            VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" 
+                                            Text="{Binding Name}"
+                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Label Text="Quantité : " VerticalOptions="Center"/>
+                                        <Entry Grid.Column="1"
+                                               Text="{Binding Quantity, Mode=TwoWay}" 
+                                               Keyboard="Numeric"
+                                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries}"
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Quantity}"
+                                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Label Text="Prix unitaire : " VerticalOptions="Center" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"/>
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding Price, StringFormat='{0:F2} €'}"
+                                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <VerticalStackLayout IsVisible="False" Spacing="5">
                                         <VerticalStackLayout.Triggers>
                                             <DataTrigger TargetType="VerticalStackLayout"
                                                          Binding="{Binding PatisserieType}"
@@ -54,13 +97,46 @@
                                             </DataTrigger>
                                         </VerticalStackLayout.Triggers>
 
-                                        <Label Text="{Binding Etage, StringFormat='Étages : {0}'}" />
-                                        <Label Text="{Binding Gout, StringFormat='Goût : {0}'}" />
-                                        <Label Text="{Binding Fruite, StringFormat='Fruité : {0}'}" />
-                                        <Label Text="{Binding Modelage, StringFormat='Modelage : {0}'}" />
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="Étages : " VerticalOptions="Center"/>
+                                            <Entry Grid.Column="1"
+                                                   Text="{Binding Etage, Mode=TwoWay}"
+                                                   Keyboard="Numeric"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries}"
+                                                   VerticalOptions="Center"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Etage}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="Goût : " VerticalOptions="Center"/>
+                                            <Entry Grid.Column="1"
+                                                   Text="{Binding Gout, Mode=TwoWay}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries}"
+                                                   VerticalOptions="Center"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Gout}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="Fruité : " VerticalOptions="Center" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Fruite, Converter={StaticResource BoolToOuiNonConverter}}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="Modelage : " VerticalOptions="Center" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Modelage, Converter={StaticResource BoolToOuiNonConverter}}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
                                     </VerticalStackLayout>
 
-                                    <VerticalStackLayout>
+                                    <VerticalStackLayout IsVisible="False">
                                         <VerticalStackLayout.Triggers>
                                             <DataTrigger TargetType="VerticalStackLayout"
                                                          Binding="{Binding PatisserieType}"
@@ -68,9 +144,15 @@
                                                 <Setter Property="IsVisible" Value="True" />
                                             </DataTrigger>
                                         </VerticalStackLayout.Triggers>
-
-                                        <Label Text="{Binding Taille, StringFormat='Grand format : {0}'}" />
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="Grand format : " VerticalOptions="Center" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Taille, Converter={StaticResource BoolToOuiNonConverter}}"
+                                                   IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=IsEditingPatisseries, Converter={StaticResource InverseBoolConverter}}"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
                                     </VerticalStackLayout>
+
                                 </VerticalStackLayout>
                             </Border>
                         </DataTemplate>

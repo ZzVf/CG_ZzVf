@@ -158,6 +158,25 @@ namespace CommandeGateau.Services
             var updatedJson = JsonSerializer.Serialize(commandes, _options);
             await File.WriteAllTextAsync(_archivePath, updatedJson);
         }
+        public async Task UpdateCommande(Commande commandeModifiee)
+        {
+            if (!File.Exists(_filePath))
+                return;
+
+            var json = await File.ReadAllTextAsync(_filePath);
+            var commandes = JsonSerializer.Deserialize<List<Commande>>(json, _options) ?? new();
+
+            var index = commandes.FindIndex(c => c.Id == commandeModifiee.Id);
+            if (index != -1)
+            {
+                commandeModifiee.RecalculerTotal();
+                commandes[index] = commandeModifiee;
+
+                var updatedJson = JsonSerializer.Serialize(commandes, _options);
+                await File.WriteAllTextAsync(_filePath, updatedJson);
+            }
+        }
+
         public void AjouterEvenementAgenda(Commande commande)
         {
 #if ANDROID

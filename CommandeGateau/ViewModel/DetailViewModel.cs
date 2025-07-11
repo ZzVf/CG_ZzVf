@@ -3,6 +3,7 @@ using CommandeGateau.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace CommandeGateau.ViewModel
 {
@@ -13,14 +14,19 @@ namespace CommandeGateau.ViewModel
         private bool isFromArchive;
         public bool IsNotFromArchive => !IsFromArchive;
 
+        [ObservableProperty]
+        private Commande commande;
+
+        // Ajout pour le mode édition des pâtisseries
+        [ObservableProperty]
+        private bool isEditingPatisseries;
 
         readonly CommandeService _service;
+
         public DetailViewModel(CommandeService service)
         {
             _service = service;
         }
-        [ObservableProperty]
-        private Commande commande;
 
         public void SetCommande(Commande commande, bool fromArchive = false)
         {
@@ -49,6 +55,7 @@ namespace CommandeGateau.ViewModel
             await Shell.Current.DisplayAlert("Supprimé", "La commande a été supprimée.", "OK");
             await Shell.Current.GoToAsync("..");
         }
+
         [RelayCommand]
         public async Task ArchiveCommande()
         {
@@ -66,6 +73,7 @@ namespace CommandeGateau.ViewModel
             await Shell.Current.DisplayAlert("Archivé", "La commande a été archivée.", "OK");
             await Shell.Current.GoToAsync("..");
         }
+
         [RelayCommand]
         public async Task DeleteArchive()
         {
@@ -82,6 +90,27 @@ namespace CommandeGateau.ViewModel
 
             await Shell.Current.DisplayAlert("Supprimé", "L'archive a été supprimée.", "OK");
             await Shell.Current.GoToAsync("..");
+        }
+
+        [RelayCommand]
+        public void ToggleEditPatisseries()
+        {
+            IsEditingPatisseries = !IsEditingPatisseries;
+        }
+        [RelayCommand]
+        public async Task ConfirmEditPatisseries()
+        {
+            IsEditingPatisseries = false;
+
+            if (Commande != null)
+            {
+                await _service.UpdateCommande(Commande);
+
+                OnPropertyChanged(nameof(Commande));
+                OnPropertyChanged(nameof(Patisseries));
+
+                await Shell.Current.DisplayAlert("Modifié", "Modifications enregistrées.", "OK");
+            }
         }
     }
 }
