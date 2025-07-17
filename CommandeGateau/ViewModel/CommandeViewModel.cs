@@ -76,6 +76,5 @@ namespace CommandeGateau.ViewModel
         {
             await GetCommandeAsync();
         }
-
     }
 }

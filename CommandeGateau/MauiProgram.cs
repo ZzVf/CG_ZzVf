@@ -34,6 +34,8 @@ public static class MauiProgram
         builder.Services.AddTransient<DetailViewModel>();
         builder.Services.AddTransient<ArchivePage>();
         builder.Services.AddTransient<ArchiveViewModel>();
+        builder.Services.AddTransient<ExportPage>();
+        builder.Services.AddTransient<ExportViewModel>();
 
 
         return builder.Build();

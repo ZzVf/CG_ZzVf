@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommandeGateau.View.ExportPage"
+             xmlns:viewmodel="clr-namespace:CommandeGateau.ViewModel"
+             x:DataType="viewmodel:ExportViewModel"
+             Title="Export/Import">
+    <Grid RowDefinitions="auto,auto">
+        <Image Source="logo.png"
+               HeightRequest="150"
+               HorizontalOptions="Center"
+               Margin="0,20,0,30" />
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="15"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+            <Button Text="Exporter les commandes"
+                    BackgroundColor="#D8A94A"
+                    BorderWidth="2"
+                    WidthRequest="250"
+                    CornerRadius="20"
+                    TextColor="#ffffff"
+                    HeightRequest="50"
+                    Command="{Binding ExportCommand}"/>
+            <Button Text="Exporter les archives"
+                    BackgroundColor="#D8A94A"
+                    BorderWidth="2"
+                    WidthRequest="250"
+                    CornerRadius="20"
+                    TextColor="#ffffff"
+                    HeightRequest="50"
+                    Command="{Binding ExportArchiveCommand}"/>
+            <Button Text="Importer les commandes"
+                    BackgroundColor="#6AC47E"
+                    BorderWidth="2"
+                    WidthRequest="250"
+                    CornerRadius="20"
+                    TextColor="#ffffff"
+                    HeightRequest="50"
+                    Command="{Binding ImportCommand}"/>
+            <Button Text="Importer les archives"
+                    BackgroundColor="#6AC47E"
+                    BorderWidth="2"
+                    WidthRequest="250"
+                    CornerRadius="20"
+                    TextColor="#ffffff"
+                    HeightRequest="50"
+                    Command="{Binding ImportArchiveCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -119,7 +119,7 @@ namespace CommandeGateau.Services
             {
                 commandesArchivees = new();
             }
-
+            await DeleteCommande(commandeArchiver);
             int maxId = commandesArchivees.Count > 0 ? commandesArchivees.Max(c => c.Id) : 0;
             commandeArchiver.Id = maxId + 1;
 
@@ -127,8 +127,6 @@ namespace CommandeGateau.Services
 
             var updatedArchiveJson = JsonSerializer.Serialize(commandesArchivees, _options);
             await File.WriteAllTextAsync(_archivePath, updatedArchiveJson);
-
-            await DeleteCommande(commandeArchiver);
         }
 
         public async Task<List<Commande>> GetArchive()
@@ -158,6 +156,9 @@ namespace CommandeGateau.Services
             var updatedJson = JsonSerializer.Serialize(commandes, _options);
             await File.WriteAllTextAsync(_archivePath, updatedJson);
         }
+        //
+        //Update
+        //
         public async Task UpdateCommande(Commande commandeModifiee)
         {
             if (!File.Exists(_filePath))

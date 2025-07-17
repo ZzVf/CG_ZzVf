@@ -68,6 +68,11 @@ namespace CommandeGateau.ViewModel
             { "IsFromArchive", true }
         });
         }
+        [RelayCommand]
+        public async Task GoToExport()
+        {
+            await Shell.Current.GoToAsync(nameof(ExportPage));
+        }
         public async Task RefreshCommandes()
         {
             await GetCommandeAsync();
